@@ -1,7 +1,3 @@
-print("Ola! PUC-PR! Projeto 1 de DevOps.")
-# Comentario 1
-# Comentario 2
-# comentario 3
-# Comentario 4
-# comentario 5
-# comentario 6 
+print('--- SISTEMA DE GESTÃO DEVOPS - PUC-PR ---')
+print('Status do Container: Ativo')
+print('Desenvolvido por: Seu Nome')
