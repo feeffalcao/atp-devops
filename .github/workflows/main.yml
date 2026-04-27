@@ -1,9 +1,31 @@
-name: CI
-on: [pull_request]
+name: Pipeline ATP Final
+on:
+  push:
+    branches: [ desenvolvimento, main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
-  build:
+  atp_job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run Python
-        run: python main.py
+      - uses: actions/checkout@v2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Instalar Pytest
+        run: pip install pytest
+
+      - name: Executar 5 Testes Unitarios
+        run: pytest test_main.py
+
+      - name: Enviar Alerta ao Discord
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ job.status }}
+          content: "Relatório da ATP enviado! Testes concluídos."
